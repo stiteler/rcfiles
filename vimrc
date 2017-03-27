@@ -4,39 +4,77 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+" Vundle let's you specify a plugin in a number of formats, but my favorite
+" allows you to grab plugins straight off of github, just specify the bundle
+" in the following format:
+" Plugin 'githubUsername/repoName'
+
+" Let vundle manage itself:
 Plugin 'VundleVim/Vundle.vim'
+
+" Just a shitload of color schemes.
+" https://github.com/flazz/vim-colorschemes#current-colorschemes
 Plugin 'flazz/vim-colorschemes'
+
+" Fuzzy finder -- absolutely must have.
 Plugin 'kien/ctrlp.vim'
+
+" Support for easily toggling comments.
 Plugin 'tpope/vim-commentary'
+
+" In addtion to the above plugins, you'll likely need some for individual
+" non-standard syntaxes that aren't pre-bundled with vim. Here are some I use,
+" these are required for me, but depending on what code you write, obviously
+" this may differ for you.
+
+" Proper JSON filetype detection, and support.
 Plugin 'leshill/vim-json'
+
+" vim already has syntax support for javascript, but the indent support is
+" horrid. This fixes that.
 Plugin 'pangloss/vim-javascript'
+
+" vim indents HTML very poorly on it's own. This fixes a lot of that.
 Plugin 'indenthtml.vim'
+
+" I write markdown a lot. This is a good syntax.
 Plugin 'tpope/vim-markdown'
+
+" end plugins
 call vundle#end()
 filetype plugin indent on
+
+" We have to turn this stuff back on if we want all of our features.
 filetype plugin indent on " Filetype auto-detection
 syntax on " Syntax highlighting
+
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
-set expandtab
+set expandtab " use spaces instead of tabs.
 set smarttab " let's tab key insert 'tab stops', and bksp deletes tabs.
 set shiftround " tab / shifting moves to closest tabstop.
 set autoindent " Match indents on new lines.
 set smartindent " Intellegently dedent / indent new lines based on rules.
 
+" We have VCS -- we don't need this stuff.
 set nobackup " We have vcs, we don't need backups.
 set nowritebackup " We have vcs, we don't need backups.
-set noswapfile
+set noswapfile " They're just annoying. Who likes them?
 
-"set hidden " allow me to have buffers with unsaved changes.
+" don't nag me when hiding buffers
+set hidden " allow me to have buffers with unsaved changes.
 set autoread " when a file has changed on disk, just load it. Don't ask.
+
+" Make search more sane
 set ignorecase " case insensitive search
 set smartcase " If there are uppercase letters, become case-sensitive.
 set incsearch " live incremental searching
 set showmatch " live match highlighting
-"set hlsearch " highlight matches
+set hlsearch " highlight matches
 set gdefault " use the `g` flag by default.
+
+" allow the cursor to go anywhere in visual block mode.
 set virtualedit+=block
 
 " leader is a key that allows you to have your own "namespace" of keybindings.
@@ -95,8 +133,6 @@ let g:ctrlp_max_height = 30
 
 " Finally the color scheme. Choose whichever you want from the list in the
 " link above (back up where we included the bundle of a ton of themes.)
-"
-" COLOR STUFF
 set bg=dark
 let &t_Co=256
 let g:molokai_original = 1
@@ -106,3 +142,5 @@ colorscheme molokai
 " whitespace
 hi ExtraWhitespace ctermbg=197
 match ExtraWhitespace /\s\+$/
+
+autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
